@@ -1,0 +1,7 @@
+echo "some content here" > matrices.txt
+
+curl -X POST https://content.dropboxapi.com/2/files/upload \
+    --header "Authorization: Bearer L3KEsdLbCtAAAAAAAAABzp8eSwFssvELycr0ogFA8oD2gpQKhbfGhuz0SWfKVdjm" \
+    --header "Dropbox-API-Arg: {\"path\": \"/Homework/math/Matrices.txt\"}" \
+    --header "Content-Type: application/octet-stream" \
+    --data-binary @matrices.txt
