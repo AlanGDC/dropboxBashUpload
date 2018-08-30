@@ -1,7 +1,18 @@
-echo "some content here" > matrices.txt
 
-curl -X POST https://content.dropboxapi.com/2/files/upload \
+dt=$(date '+%d%m%Y%H%M%S');
+echo "Date time: ""$dt"
+	curl -X POST https://content.dropboxapi.com/2/files/upload \
     --header "Authorization: Bearer L3KEsdLbCtAAAAAAAAABzp8eSwFssvELycr0ogFA8oD2gpQKhbfGhuz0SWfKVdjm" \
-    --header "Dropbox-API-Arg: {\"path\": \"/Homework/math/Matrices.txt\"}" \
+    --header "Dropbox-API-Arg: {\"path\": \"/ReportsHtml/nice_report$dt.html\"}" \
     --header "Content-Type: application/octet-stream" \
-    --data-binary @matrices.txt
+    --data-binary @nice_report.html
+
+	curl -X POST https://api.dropboxapi.com/2/files/get_temporary_link \
+    --header "Authorization: Bearer L3KEsdLbCtAAAAAAAAABzp8eSwFssvELycr0ogFA8oD2gpQKhbfGhuz0SWfKVdjm" \
+    --header "Content-Type: application/json" \
+    --data "{\"path\": \"/ReportsHtml/nice_report$dt.html\"}" | jq '.["link"]'
+
+echo All done
+
+
+
